@@ -2,7 +2,7 @@
 
 ## Overview  
 
-WatchingDemon(WaD) performs like a Unix daemon, monitors registered processes and restarts them in case of a crash. WaD has another process which monitor WaD itself, so works stably for a long time.
+WatchingDemon(WaD) performs like a Unix daemon, and monitors registered processes and restarts them in case of a crash. WaD has another process which monitor WaD itself, so works stably for a long time.
 WaD can be operated remotely via UDP, and you can extend that functionality with plugins.
 
 ## Process Monitor
