@@ -9,7 +9,7 @@ namespace PacketTrigger
 {
     class AppMonitoringSwitchTrigger : Plugin
     {
-        public override string PluginName { get { return "AppMonitoringSwitchTrigger"; } }
+        public override string PluginName { get { return "AppMonitoringSwitch"; } }
 
         public override short Id { get { return (short)DefaultTriggerId.MonitoringSwitch; } }
 

@@ -9,7 +9,7 @@ namespace PacketTrigger
 {
     class PCRebootTriggerPlugin : Plugin
     {
-        public override string PluginName { get { return "PCRboot"; } }
+        public override string PluginName { get { return "PCReboot"; } }
 
         public override short Id { get { return (short)DefaultTriggerId.Reboot; } }
 

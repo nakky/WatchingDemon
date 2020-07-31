@@ -9,7 +9,7 @@ namespace PacketTrigger
 {
     class AppKillProcessTrigger : Plugin
     {
-        public override string PluginName { get { return "AppKillProcessTrigger"; } }
+        public override string PluginName { get { return "AppKillProcess"; } }
 
         public override short Id { get { return (short)DefaultTriggerId.KillProcess; } }
 

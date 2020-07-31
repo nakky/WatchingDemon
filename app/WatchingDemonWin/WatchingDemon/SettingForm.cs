@@ -254,7 +254,7 @@ namespace WatchingDemon
 
             column3 = new ColumnHeader();
             column3.Text = "Description";
-            column3.Width = 400;
+            column3.Width = 530;
 
 
             colHeaderRegValue = new ColumnHeader[] { column0, column1, column2, column3 };
