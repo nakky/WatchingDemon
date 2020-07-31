@@ -34,15 +34,16 @@ namespace WatchingDemonApi
             timer.Start();
         }
 
+        public void Dispose()
+        {
+            timer.Stop();
+            com.Close();
+        }
+
         private void OnTimer(object sender, ElapsedEventArgs e)
         {
             byte[] data = new byte[1] { ProcessId };
             com.Send(node, 0, data);
-        }
-
-        public void Dispose()
-        {
-            com.Close();
         }
 
     }

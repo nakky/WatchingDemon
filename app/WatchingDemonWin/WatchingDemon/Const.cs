@@ -11,5 +11,6 @@ namespace WatchingDemon
         public static string PacketTriggerPath = "./PacketTrigger.ini";
         public static string ProcessPath = "./Process.ini";
         public static string ConfigPath = "./Config.ini";
+        public static string AllowListPath = "./AllowList.ini"; 
     }
 }

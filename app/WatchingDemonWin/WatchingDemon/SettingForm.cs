@@ -55,14 +55,22 @@ namespace WatchingDemon
                 logger.Log(l);
             };
 
+            //AllowList
+            AllowList alist = new AllowList();
+            alist.Deserialize(Const.AllowListPath);
+
             //PacketTrigger
             LoadPlugins();
             PacketTriggerManager.Instance.Deserialize(Const.PacketTriggerPath);
-            PacketTriggerManager.Instance.Open(Config.ListenPortNumber);
+            PacketTriggerManager.Instance.AllowList = alist;
+            PacketTriggerManager.Instance.OpenReceiveChannel(Config.ListenPortNumber);
+            PacketTriggerManager.Instance.OpenSendChannel(Config.SendPortNumber);
 
 
 #if !DEBUG
             ExecuteBackgroundProcess();
+#else
+            Visible = true;
 #endif
 
             ProcessManager.Instance.OnMonitoring += () => 
@@ -185,7 +193,7 @@ namespace WatchingDemon
 
             column4 = new ColumnHeader();
             column4.Text = "Arguments";
-            column4.Width = 90;
+            column4.Width = 80;
 
             column5 = new ColumnHeader();
             column5.Text = "Logic";
@@ -246,12 +254,23 @@ namespace WatchingDemon
 
             column3 = new ColumnHeader();
             column3.Text = "Description";
-            column3.Width = 600;
+            column3.Width = 400;
 
 
             colHeaderRegValue = new ColumnHeader[] { column0, column1, column2, column3 };
             listViewTriggers.Columns.AddRange(colHeaderRegValue);
 
+            listViewAllowList.FullRowSelect = true;
+            listViewAllowList.GridLines = true;
+            listViewAllowList.Sorting = SortOrder.None;
+            listViewAllowList.View = View.Details;
+
+            column0 = new ColumnHeader();
+            column0.Text = "IP Address";
+            column0.Width = 270;
+
+            colHeaderRegValue = new ColumnHeader[] { column0 };
+            listViewAllowList.Columns.AddRange(colHeaderRegValue);
 
         }
 
@@ -338,8 +357,15 @@ namespace WatchingDemon
 
         void UpdateConfig()
         {
+            textBoxConfigSendPort.Text = Config.SendPortNumber.ToString();
             textBoxConfigListenPort.Text = Config.ListenPortNumber.ToString();
             checkBoxConfigStartMonitor.Checked = Config.AutoStart;
+
+            listViewAllowList.Items.Clear();
+            foreach(var item in PacketTriggerManager.Instance.AllowList.List)
+            {
+                listViewAllowList.Items.Add(item);
+            }
         }
 
 #region EventHandler
@@ -437,17 +463,78 @@ namespace WatchingDemon
             PacketTriggerManager.Instance.Serialize(Const.PacketTriggerPath);
         }
 
+        private void OnAddAllowListClick(object sender, EventArgs e)
+        {
+            ListViewItem item = new ListViewItem();
+            item.Text = "";
+            listViewAllowList.Items.Add(item);
+            listViewAllowList.Focus();
+            item.BeginEdit();
+        }
+
+        private void OnRemoveAllowListClick(object sender, EventArgs e)
+        {
+            AllowList alist = PacketTriggerManager.Instance.AllowList;
+            foreach (ListViewItem item in listViewAllowList.SelectedItems)
+            {
+                alist.List.Remove(item.SubItems[0].Text);
+            }
+            alist.Serialize(Const.AllowListPath);
+            UpdateConfig();
+
+            labelConfigApply.Visible = true;
+        }
+
+        private void OnAllowListAfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            AllowList alist = new AllowList();
+            List<string> list = new List<string>();
+
+            foreach (ListViewItem item in listViewAllowList.Items)
+            {
+                string data = item.SubItems[0].Text;
+                if (item.Index == e.Item) data = e.Label;
+                //Console.WriteLine(data);
+                list.Add(data);
+            }
+            alist.List = list;
+            alist.Serialize(Const.AllowListPath);
+            PacketTriggerManager.Instance.AllowList = alist;
+            UpdateConfig();
+
+            labelConfigApply.Visible = true;
+        }
+
         private void OnAutoPlayCheckedChanged(object sender, EventArgs e)
         {
             Config.AutoStart = checkBoxConfigStartMonitor.Checked;
             Config.Serialize(Const.ConfigPath);
+
+            labelConfigApply.Visible = true;
         }
 
         private void OnListenPortTextChanged(object sender, EventArgs e)
         {
             try
             {
-                Config.ListenPortNumber = int.Parse(textBoxConfigListenPort.Text);
+                int number = int.Parse(textBoxConfigListenPort.Text);
+                if (Config.ListenPortNumber != number) labelConfigApply.Visible = true;
+                Config.ListenPortNumber = number;
+                Config.Serialize(Const.ConfigPath);
+            }
+            catch
+            {
+                UpdateConfig();
+            }
+        }
+
+        private void OnSendPortTextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int number = int.Parse(textBoxConfigSendPort.Text);
+                if (Config.SendPortNumber != number) labelConfigApply.Visible = true;
+                Config.SendPortNumber = number;
                 Config.Serialize(Const.ConfigPath);
             }
             catch
@@ -502,6 +589,6 @@ namespace WatchingDemon
 
         }
 
-
+       
     }
 }

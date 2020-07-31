@@ -51,13 +51,19 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listViewTriggers = new System.Windows.Forms.ListView();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
-            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxConfigSendPort = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelConfigApply = new System.Windows.Forms.Label();
             this.buttonRestart = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxConfigListenPort = new System.Windows.Forms.TextBox();
             this.checkBoxConfigStartMonitor = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.buttonRemoveAllowList = new System.Windows.Forms.Button();
+            this.buttonAddAllowList = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listViewAllowList = new System.Windows.Forms.ListView();
             this.contextMenuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageMonitor.SuspendLayout();
@@ -245,14 +251,20 @@
             this.listViewTriggers.HideSelection = false;
             this.listViewTriggers.Location = new System.Drawing.Point(8, 26);
             this.listViewTriggers.Name = "listViewTriggers";
-            this.listViewTriggers.Size = new System.Drawing.Size(1026, 450);
+            this.listViewTriggers.Size = new System.Drawing.Size(740, 450);
             this.listViewTriggers.TabIndex = 0;
             this.listViewTriggers.UseCompatibleStateImageBehavior = false;
             this.listViewTriggers.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnPacketTriggerItemChecked);
             // 
             // tabPageSetting
             // 
-            this.tabPageSetting.Controls.Add(this.label7);
+            this.tabPageSetting.Controls.Add(this.buttonRemoveAllowList);
+            this.tabPageSetting.Controls.Add(this.buttonAddAllowList);
+            this.tabPageSetting.Controls.Add(this.label8);
+            this.tabPageSetting.Controls.Add(this.listViewAllowList);
+            this.tabPageSetting.Controls.Add(this.textBoxConfigSendPort);
+            this.tabPageSetting.Controls.Add(this.label3);
+            this.tabPageSetting.Controls.Add(this.labelConfigApply);
             this.tabPageSetting.Controls.Add(this.buttonRestart);
             this.tabPageSetting.Controls.Add(this.label6);
             this.tabPageSetting.Controls.Add(this.textBoxConfigListenPort);
@@ -267,14 +279,34 @@
             this.tabPageSetting.Text = "Settings";
             this.tabPageSetting.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // textBoxConfigSendPort
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(730, 438);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(280, 12);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "(Config parameters are applied when restart daemon.)";
+            this.textBoxConfigSendPort.Location = new System.Drawing.Point(154, 149);
+            this.textBoxConfigSendPort.Name = "textBoxConfigSendPort";
+            this.textBoxConfigSendPort.Size = new System.Drawing.Size(100, 19);
+            this.textBoxConfigSendPort.TabIndex = 8;
+            this.textBoxConfigSendPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxConfigSendPort.TextChanged += new System.EventHandler(this.OnSendPortTextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 152);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 12);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Send port number";
+            // 
+            // labelConfigApply
+            // 
+            this.labelConfigApply.AutoSize = true;
+            this.labelConfigApply.ForeColor = System.Drawing.Color.Red;
+            this.labelConfigApply.Location = new System.Drawing.Point(730, 438);
+            this.labelConfigApply.Name = "labelConfigApply";
+            this.labelConfigApply.Size = new System.Drawing.Size(280, 12);
+            this.labelConfigApply.TabIndex = 6;
+            this.labelConfigApply.Text = "(Config parameters are applied when restart daemon.)";
+            this.labelConfigApply.Visible = false;
             // 
             // buttonRestart
             // 
@@ -333,6 +365,46 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Process Monitor";
             // 
+            // buttonRemoveAllowList
+            // 
+            this.buttonRemoveAllowList.Image = global::WatchingDemon.Properties.Resources.minus;
+            this.buttonRemoveAllowList.Location = new System.Drawing.Point(766, 350);
+            this.buttonRemoveAllowList.Name = "buttonRemoveAllowList";
+            this.buttonRemoveAllowList.Size = new System.Drawing.Size(25, 25);
+            this.buttonRemoveAllowList.TabIndex = 17;
+            this.buttonRemoveAllowList.UseVisualStyleBackColor = true;
+            this.buttonRemoveAllowList.Click += new System.EventHandler(this.OnRemoveAllowListClick);
+            // 
+            // buttonAddAllowList
+            // 
+            this.buttonAddAllowList.Image = global::WatchingDemon.Properties.Resources.plus;
+            this.buttonAddAllowList.Location = new System.Drawing.Point(735, 350);
+            this.buttonAddAllowList.Name = "buttonAddAllowList";
+            this.buttonAddAllowList.Size = new System.Drawing.Size(25, 25);
+            this.buttonAddAllowList.TabIndex = 16;
+            this.buttonAddAllowList.UseVisualStyleBackColor = true;
+            this.buttonAddAllowList.Click += new System.EventHandler(this.OnAddAllowListClick);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(733, 2);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 12);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "Allow List";
+            // 
+            // listViewAllowList
+            // 
+            this.listViewAllowList.HideSelection = false;
+            this.listViewAllowList.LabelEdit = true;
+            this.listViewAllowList.Location = new System.Drawing.Point(732, 21);
+            this.listViewAllowList.Name = "listViewAllowList";
+            this.listViewAllowList.Size = new System.Drawing.Size(280, 323);
+            this.listViewAllowList.TabIndex = 14;
+            this.listViewAllowList.UseCompatibleStateImageBehavior = false;
+            this.listViewAllowList.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.OnAllowListAfterLabelEdit);
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -381,11 +453,17 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxConfigListenPort;
         private System.Windows.Forms.Button buttonRestart;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelConfigApply;
         private System.Windows.Forms.Button buttonProcessEdit;
         private System.Windows.Forms.ToolStripMenuItem monitoringToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem restartToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxConfigSendPort;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonRemoveAllowList;
+        private System.Windows.Forms.Button buttonAddAllowList;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListView listViewAllowList;
     }
 }
 

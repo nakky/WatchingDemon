@@ -10,6 +10,7 @@ namespace WatchingDemon
     class Config
     {
         public int ListenPortNumber = 12300;
+        public int SendPortNumber = 12301;
         public bool AutoStart = false;
 
 
@@ -18,6 +19,7 @@ namespace WatchingDemon
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.UTF8))
             {
                 writer.WriteLine("ListenPortNumber=" + ListenPortNumber);
+                writer.WriteLine("SendPortNumber=" + SendPortNumber);
                 writer.WriteLine("AutoStart=" + AutoStart);
 
                 writer.Close();
@@ -40,6 +42,10 @@ namespace WatchingDemon
                         if(token[0] == "ListenPortNumber")
                         {
                             ListenPortNumber = int.Parse(token[1]);
+                        }
+                        else if (token[0] == "SendPortNumber")
+                        {
+                            SendPortNumber = int.Parse(token[1]);
                         }
                         else if(token[0] == "AutoStart")
                         {

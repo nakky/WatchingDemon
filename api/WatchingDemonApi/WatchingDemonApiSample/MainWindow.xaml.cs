@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 using WatchingDemonApi;
 
 namespace WatchingDemonApiSample
@@ -26,9 +26,29 @@ namespace WatchingDemonApiSample
 
         PacketTriggerApi triggerApi = new PacketTriggerApi();
 
+        RemoteMonitor monitor;
+        RemoteNode node;
+        DispatcherTimer eventTimer;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            string[] ipList = new string[1] { "127.0.0.1" };
+            monitor = new RemoteMonitor(ipList);
+
+            node = monitor.GetNode(ipList[0]);
+
+            eventTimer = new DispatcherTimer(DispatcherPriority.Normal, this.Dispatcher);
+            eventTimer.Interval = TimeSpan.FromSeconds(1);
+            eventTimer.Tick += new EventHandler(OnTimer);
+            eventTimer.Start();
+        }
+
+        private void OnTimer(object sender, EventArgs e)
+        {
+            //Console.WriteLine(node.Ip + ":" + node.Status);
+            labelStatus.Content = "Status:" + node.Status;
         }
 
         private void OnButtonShutdownClick(object sender, RoutedEventArgs e)

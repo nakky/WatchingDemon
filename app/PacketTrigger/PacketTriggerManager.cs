@@ -29,11 +29,18 @@ namespace PacketTrigger
         #endregion
 
         Dictionary<short, Plugin> pluginMap = new Dictionary<short, Plugin>();
-        ComTerminal com = new ComTerminal();
+        ComTerminal recvCom = new ComTerminal();
+        ComTerminal sendCom = new ComTerminal();
+
+        AllowList allowList = new AllowList();
+
+        public AllowList AllowList {
+            get { return allowList;}
+            set { allowList = value; }
+        }
 
         private PacketTriggerManager()
         {
-
         }
 
         public void SearchPacketTriggers(Assembly asm)
@@ -57,10 +64,10 @@ namespace PacketTrigger
         {
             pluginMap.Add(plugin.Id, plugin);
 
-            com.AddChannel(
+            recvCom.AddChannel(
                 new DataChannel<byte[]>(plugin.Id, QosType.Unreliable, Compression.None, (node, data) => {
-                    Process(plugin.Id, data);
-                }, CheckMode.Speedy));
+                    Process(node, plugin.Id, data);
+                }));
         }
 
         public IOrderedEnumerable<KeyValuePair<short, Plugin>> GetOrderdPluginMap()
@@ -74,12 +81,12 @@ namespace PacketTrigger
             else return null;
         }
 
-        public void Open(int listenPort)
+        public void OpenReceiveChannel(int port)
         {
-            com.ListenPortNumber = listenPort;
-            com.SendPortNumber = 0;
+            recvCom.ListenPortNumber = port;
+            recvCom.SendPortNumber = 0;
 
-            com.AddChannel(
+            recvCom.AddChannel(
                 new DataChannel<byte[]>(0, QosType.Unreliable, Compression.None, (node, data) => {
                     if (ProcessManager.Instance.IsMonitoring)
                     {
@@ -94,21 +101,54 @@ namespace PacketTrigger
                     }
                 }, CheckMode.Speedy));
 
-            com.Open();
+            var list = allowList.List;
+            foreach (var item in list)
+            {
+                recvCom.AddAcceptList(item);
+            }
+
+            recvCom.Open();
+        }
+
+        public void OpenSendChannel(int port)
+        {
+            sendCom.ListenPortNumber = 0;
+            sendCom.SendPortNumber = port;
+
+            var list = allowList.List;
+            foreach (var item in list)
+            {
+                sendCom.AddAcceptList(item);
+            }
+
+            sendCom.Open();
         }
 
         public void Close()
         {
-            com.Close();
+            recvCom.Close();
+            sendCom.Close();
         }
 
-        public bool Process(short id, byte[] data)
+        public void RegisterSendChannel(short channdlId)
+        {
+            sendCom.AddChannel(
+                new DataChannel<byte[]>(channdlId, QosType.Unreliable, Compression.None, (node, data) => { })
+                );
+        }
+
+        public void Send(string ip, short channelId, byte[] data)
+        {
+            sendCom.Send(new ComNode(ip), channelId, data);
+        }
+
+        public bool Process(ComNode node, short id, byte[] data)
         {
             if (pluginMap.ContainsKey(id))
             {
                 if (pluginMap[id].Enable)
                 {
-                    pluginMap[id].Process(data);
+                    pluginMap[id].Process(node.IP, data);
                     return true;
                 }
                 else return false;

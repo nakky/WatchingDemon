@@ -21,7 +21,7 @@ namespace PacketTrigger
             }
         }
 
-        public override void Process(byte[] param)
+        public override void Process(string ip, byte[] param)
         {
             try
             {

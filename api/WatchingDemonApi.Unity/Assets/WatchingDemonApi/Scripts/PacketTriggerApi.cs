@@ -5,7 +5,7 @@ using Snowball;
 
 namespace WatchingDemonApi
 {
-    public class PacketTriggerApi
+    public class PacketTriggerApi : IDisposable
     {
         ComTerminal com = new ComTerminal();
         ComNode node = new ComNode(IPAddress.Loopback.ToString());
@@ -21,6 +21,11 @@ namespace WatchingDemonApi
             RegisterTriggerId((short)DefaultTriggerId.KillProcess);
 
             com.Open();
+        }
+
+        public void Dispose()
+        {
+            com.Close();
         }
 
         public bool RegisterTriggerId(short id)

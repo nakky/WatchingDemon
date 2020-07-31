@@ -9,6 +9,7 @@ namespace PacketTrigger
         Health = 0,
 
         //System
+        OuterHealthCheck = 100,
         ShutDown = 101,
         Reboot = 102,
 

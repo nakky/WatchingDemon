@@ -10,7 +10,7 @@ namespace PacketTrigger
 
         public abstract string Description { get; }
 
-        public abstract void Process(byte[] param);
+        public abstract void Process(string ip, byte[] param);
 
         bool enable = false;
         public bool Enable
