@@ -55,6 +55,6 @@ This repo includes WaD project, InD project, WaD API and so on. The folder struc
    - app/ProcessMonitor : includes DLL project related to process monitoring.
    - app/PacketTrigger : includes DLL project related to PacketTrigger.
    - app/DefaultPacketTriggerPlugin : includes PacketTrigger plugin project.
- - api : includes API projects.
-   - api/WatchingDemonApi : includes API project for .NET.
-   - api/WatchingDemonApi.Unity : includes API project for Unity.
+ - sdk : includes SDK projects.
+   - sdk/WatchingDemonApi : includes SDK project for .NET.
+   - sdk/WatchingDemonApi.Unity : includes SDK project for Unity.
