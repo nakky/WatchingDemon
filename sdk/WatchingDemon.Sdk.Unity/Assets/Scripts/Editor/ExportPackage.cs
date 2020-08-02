@@ -12,10 +12,11 @@ public static class UnityPackageExporter
 	{
 		var exportRootPath = Path.GetDirectoryName(Application.dataPath);
 
-		var exportDatas = Directory.GetDirectories(Application.dataPath + "/", "WatchingDemonApi")
+		var exportDatas = Directory.GetDirectories(Application.dataPath + "/", "WatchingDemon.Sdk")
 		.Select(dir =>
 		{
-			var inputFilePath = "Assets" + dir.Substring(Application.dataPath.Length);
+            //Debug.Log("dir:" + dir);
+            var inputFilePath = "Assets" + dir.Substring(Application.dataPath.Length);
 			var outputFilePath = Path.Combine(exportRootPath, Path.GetFileName(inputFilePath) + ".unitypackage");
 			return new ExportData { InputFilePath = inputFilePath, OutputFilePath = outputFilePath };
 		})
