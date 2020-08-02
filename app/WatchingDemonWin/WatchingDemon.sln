@@ -6,12 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessMonitor", "..\ProcessMonitor\ProcessMonitor.csproj", "{9D5A06F7-89DE-452B-81BA-74F6EF3814E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WatchingDemon", "WatchingDemon\WatchingDemon.csproj", "{313435D4-322D-4268-9740-DEB8CCCB4673}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF995FE9-E713-40EB-8BF6-3CE8783730B0} = {AF995FE9-E713-40EB-8BF6-3CE8783730B0}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentDemon", "IntelligentDemon\IntelligentDemon.csproj", "{6B827014-1BC0-437A-9609-3CC71577FAA9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PacketTrigger", "..\PacketTrigger\PacketTrigger.csproj", "{951C7FF5-09BA-4A4D-B402-6BECC058A08A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefaultPacketTriggerPlugin", "..\DefaultPacketTriggerPlugin\DefaultPacketTriggerPlugin.csproj", "{AF995FE9-E713-40EB-8BF6-3CE8783730B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefaultPacketTriggerPlugin", "..\DefaultPacketTriggerPlugin\DefaultPacketTriggerPlugin.csproj", "{AF995FE9-E713-40EB-8BF6-3CE8783730B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

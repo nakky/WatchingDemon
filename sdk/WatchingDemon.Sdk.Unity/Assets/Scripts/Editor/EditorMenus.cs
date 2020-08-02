@@ -12,8 +12,8 @@ static class EditorMenus
     {
         if(EditorUtility.DisplayDialog("Update Sources", " Would you like to update sources?", "Yes", "No"))
         {
-            string sourcePath = Path.Combine(Application.dataPath, "../../WatchingDemonSdk/WatchingDemonSdk/");
-            string targetPath = Path.Combine(Application.dataPath, "./WatchingDemonSdk/Scripts/");
+            string sourcePath = Path.Combine(Application.dataPath, "../../WatchingDemon.Sdk/WatchingDemon.Sdk/");
+            string targetPath = Path.Combine(Application.dataPath, "./WatchingDemon.Sdk/Scripts/");
 
             CopyFilesInDirectory(sourcePath, targetPath);
         }

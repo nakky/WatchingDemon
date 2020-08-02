@@ -3,7 +3,7 @@ using System.Net;
 using System.Timers;
 using Snowball;
 
-namespace WatchingDemonSdk
+namespace WatchingDemon.Sdk
 {
     public class UdpHealthPulse : IDisposable
     {

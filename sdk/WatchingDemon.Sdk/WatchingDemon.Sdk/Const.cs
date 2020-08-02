@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WatchingDemonSdk
+namespace WatchingDemon.Sdk
 {
     public enum DefaultTriggerId
     {

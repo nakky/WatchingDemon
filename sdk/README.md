@@ -17,12 +17,16 @@ For Unity projects, you need to add the Snowball unitypackage. Download from the
 
  - UdpHealthPulse : Class sends UDP packets of UDP check logic.
 ```csharp
+using WatchingDemon.Sdk;
+...
 //This class works only by instantiating and holding
 UdpHealthPulse udpHealthPulse = new UdpHealthPulse();
 ```
 
  - RemoteMonitor : Class that monitors the status of other terminals.
 ```csharp
+using WatchingDemon.Sdk;
+...
 RemoteMonitor monitor;
 RemoteNode node;
 ...
@@ -36,6 +40,8 @@ Console.WriteLine("Status:" + node.Status);
  - PacketTriggerApi : Class that contains APIs that send UDP of PacketTrigger.
 
 ```csharp
+using WatchingDemon.Sdk;
+...
 PacketTriggerApi triggerApi = new PacketTriggerApi();
 ...
 triggerApi.MonitoringStart();

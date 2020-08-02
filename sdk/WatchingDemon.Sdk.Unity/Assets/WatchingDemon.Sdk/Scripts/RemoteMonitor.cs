@@ -4,7 +4,7 @@ using System.Text;
 using System.Timers;
 using Snowball;
 
-namespace WatchingDemonSdk
+namespace WatchingDemon.Sdk
 {
     public enum RemoteStatus
     {

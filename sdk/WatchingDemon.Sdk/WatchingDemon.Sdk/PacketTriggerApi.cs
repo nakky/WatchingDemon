@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Snowball;
 
-namespace WatchingDemonSdk
+namespace WatchingDemon.Sdk
 {
     public class PacketTriggerApi : IDisposable
     {

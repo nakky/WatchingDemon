@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0D208AFF-A527-4F09-8571-4C5F4995F45B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>WatchingDemonSdkSample</RootNamespace>
-    <AssemblyName>WatchingDemonSdkSample</AssemblyName>
+    <RootNamespace>WatchingDemon.Sdk.Sample</RootNamespace>
+    <AssemblyName>WatchingDemon.Sdk.Sample</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -99,9 +99,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WatchingDemonSdk\WatchingDemonSdk.csproj">
-      <Project>{36e2ec7a-8eb1-46ec-9931-a58c723a2980}</Project>
-      <Name>WatchingDemonSdk</Name>
+    <ProjectReference Include="..\WatchingDemon.Sdk\WatchingDemon.Sdk.csproj">
+      <Project>{9d548e97-ccec-47d2-a8cc-06cfe228eddc}</Project>
+      <Name>WatchingDemon.Sdk</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

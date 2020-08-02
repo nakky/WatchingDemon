@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-using WatchingDemonSdk;
+using WatchingDemon.Sdk;
 
 public class UdpHealthMain : MonoBehaviour
 {

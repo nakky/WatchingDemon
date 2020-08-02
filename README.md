@@ -56,5 +56,5 @@ This repo includes WaD project, InD project, WaD API and so on. The folder struc
    - app/PacketTrigger : includes DLL project related to PacketTrigger.
    - app/DefaultPacketTriggerPlugin : includes PacketTrigger plugin project.
  - sdk : includes SDK projects.
-   - sdk/WatchingDemonSdk : includes SDK project for .NET.
-   - sdk/WatchingDemonSdk.Unity : includes SDK project for Unity.
+   - sdk/WatchingDemon.Sdk : includes SDK project for .NET.
+   - sdk/WatchingDemon.Sdk.Unity : includes SDK project for Unity.

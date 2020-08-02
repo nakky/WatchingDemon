@@ -14,9 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
-using WatchingDemonSdk;
+using WatchingDemon.Sdk;
 
-namespace WatchingDemonSdkSample
+namespace WatchingDemon.Sdk.Sample
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック
