@@ -19,7 +19,7 @@ using WatchingDemon.Sdk;
 namespace WatchingDemon.Sdk.Sample
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// MainWindow.xam
     /// </summary>
     public partial class MainWindow : Window
     {
