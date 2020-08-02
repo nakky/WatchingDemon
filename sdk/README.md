@@ -5,7 +5,7 @@ In the UDP check logic, the monitored application must support it. Functions for
 
 
 
-## How to build
+## Installation
 
 WatchingDemon's communication protocol follows [Snowball](https://github.com/nakky/Snowball), so this SDK project depends on Snowball. 
 
