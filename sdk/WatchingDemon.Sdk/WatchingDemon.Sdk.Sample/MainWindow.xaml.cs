@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,8 @@ namespace WatchingDemon.Sdk.Sample
         UdpHealthPulse udpHealthPulse = new UdpHealthPulse(1);
 
         PacketTriggerApi triggerApi = new PacketTriggerApi();
+
+        string targetIp = IPAddress.Loopback.ToString();
 
         RemoteMonitor monitor;
         RemoteNode node;
@@ -57,7 +60,7 @@ namespace WatchingDemon.Sdk.Sample
             var result = MessageBox.Show("Are you sure you want to shutdown?", "Warning", MessageBoxButton.OKCancel);
             if(result == MessageBoxResult.OK)
             {
-                triggerApi.ShutdownRequest();
+                triggerApi.ShutdownRequest(targetIp);
             }
         }
 
@@ -66,7 +69,7 @@ namespace WatchingDemon.Sdk.Sample
             var result = MessageBox.Show("Are you sure you want to reboot?", "Warning", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.OK)
             {
-                triggerApi.RebootRequest();
+                triggerApi.RebootRequest(targetIp);
             }
         }
 
@@ -75,7 +78,7 @@ namespace WatchingDemon.Sdk.Sample
             try
             {
                 byte id = byte.Parse(textBoxKillApp.Text);
-                triggerApi.KillProcess(id);
+                triggerApi.KillProcess(targetIp, id);
             }
             catch
             {
@@ -86,12 +89,12 @@ namespace WatchingDemon.Sdk.Sample
 
         private void OnButtonStartMonitoringClick(object sender, RoutedEventArgs e)
         {
-            triggerApi.MonitoringStart();
+            triggerApi.MonitoringStart(targetIp);
         }
 
         private void OnButtonStopMonitoringClick(object sender, RoutedEventArgs e)
         {
-            triggerApi.MonitoringStop();
+            triggerApi.MonitoringStop(targetIp);
         }
     }
 }

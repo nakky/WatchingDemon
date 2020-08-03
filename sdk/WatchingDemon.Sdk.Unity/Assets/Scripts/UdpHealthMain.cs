@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,10 +23,12 @@ public class UdpHealthMain : MonoBehaviour
 
     float elapsed;
 
+    string targetIp = IPAddress.Loopback.ToString();
+
     // Start is called before the first frame update
     void Start()
     {
-        string[] ipList = new string[1] { "127.0.0.1" };
+        string[] ipList = new string[1] { targetIp };
         monitor = new RemoteMonitor(ipList);
         node = monitor.GetNode(ipList[0]);
     }
@@ -48,22 +51,22 @@ public class UdpHealthMain : MonoBehaviour
 
     public void OnShutDown()
     {
-        api.ShutdownRequest();
+        api.ShutdownRequest(targetIp);
     }
 
     public void OnReboot()
     {
-        api.RebootRequest();
+        api.RebootRequest(targetIp);
     }
 
     public void OnStartMonitoring()
     {
-        api.MonitoringStart();
+        api.MonitoringStart(targetIp);
     }
 
     public void OnStopMonitoring()
     {
-        api.MonitoringStop();
+        api.MonitoringStop(targetIp);
     }
 
     public void OnKillProcess()
@@ -71,7 +74,7 @@ public class UdpHealthMain : MonoBehaviour
         try
         {
             byte id = byte.Parse(killProcessIdField.text);
-            api.KillProcess(id);
+            api.KillProcess(targetIp, id);
         }
         catch
         {

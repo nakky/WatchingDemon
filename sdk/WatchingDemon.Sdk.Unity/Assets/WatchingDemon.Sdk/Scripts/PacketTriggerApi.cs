@@ -8,7 +8,6 @@ namespace WatchingDemon.Sdk
     public class PacketTriggerApi : IDisposable
     {
         ComTerminal com = new ComTerminal();
-        ComNode node = new ComNode(IPAddress.Loopback.ToString());
 
         public PacketTriggerApi(int sendPort = 12300)
         {
@@ -19,7 +18,6 @@ namespace WatchingDemon.Sdk
             RegisterTriggerId((short)DefaultTriggerId.ShutDown);
             RegisterTriggerId((short)DefaultTriggerId.MonitoringSwitch);
             RegisterTriggerId((short)DefaultTriggerId.KillProcess);
-
             com.Open();
         }
 
@@ -41,43 +39,44 @@ namespace WatchingDemon.Sdk
             return true;
         }
 
-        public async void Send(short triggerId, byte[] data, int sendTime = 4, int intervalMillisec = 100)
+        public async void Send(string targetIp, short triggerId, byte[] data, int sendTime = 4, int intervalMillisec = 100)
         {
-            for(int i = 0; i < sendTime; i++)
+            var node = new ComNode(targetIp);
+            for (int i = 0; i < sendTime; i++)
             {
                 await com.Send(node, triggerId, data).ConfigureAwait(false);
                 await Task.Delay(intervalMillisec);
             }
         }
 
-        public void ShutdownRequest()
+        public void ShutdownRequest(string targetIp)
         {
             byte[] dummy = new byte[1] { 0 };
-            Send((short)DefaultTriggerId.ShutDown, dummy);
+            Send(targetIp, (short)DefaultTriggerId.ShutDown, dummy);
         }
 
-        public void RebootRequest()
+        public void RebootRequest(string targetIp)
         {
             byte[] dummy = new byte[1] { 0 };
-            Send((short)DefaultTriggerId.Reboot, dummy);
+            Send(targetIp, (short)DefaultTriggerId.Reboot, dummy);
         }
 
-        public void MonitoringStart()
+        public void MonitoringStart(string targetIp)
         {
             byte[] data = new byte[1] { 1 };
-            Send((short)DefaultTriggerId.MonitoringSwitch, data);
+            Send(targetIp, (short)DefaultTriggerId.MonitoringSwitch, data);
         }
 
-        public void MonitoringStop()
+        public void MonitoringStop(string targetIp)
         {
             byte[] data = new byte[1] { 0 };
-            Send((short)DefaultTriggerId.MonitoringSwitch, data);
+            Send(targetIp, (short)DefaultTriggerId.MonitoringSwitch, data);
         }
 
-        public void KillProcess(byte processId)
+        public void KillProcess(string targetIp, byte processId)
         {
             byte[] data = new byte[1] { processId };
-            Send((short)DefaultTriggerId.KillProcess, data);
+            Send(targetIp, (short)DefaultTriggerId.KillProcess, data);
         }
     }
 }
