@@ -157,7 +157,7 @@
     <PostBuildEvent>if $(ConfigurationName) == Release (
 mkdir $(TargetDir)..\$(TargetName)
 xcopy /S /E /F /G /H /R /K /Y $(TargetDir)..\Release $(TargetDir)..\$(TargetName)
-powershell compress-archive -Update $(TargetDir)..\$(TargetName) $(TargetDir)..\$(TargetName).$(AssemblyFileVersion).zip
+powershell compress-archive -Update $(TargetDir)..\$(TargetName) $(TargetDir)..\$(TargetName).zip
 rd /Q /S $(TargetDir)..\$(TargetName)
 )</PostBuildEvent>
   </PropertyGroup>

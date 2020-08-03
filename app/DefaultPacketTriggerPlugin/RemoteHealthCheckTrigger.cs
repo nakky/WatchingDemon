@@ -28,8 +28,10 @@ namespace PacketTrigger
 
         public override void Process(string ip, byte[] param)
         {
-            byte[] dummy = new byte[1] { 0 };
-            PacketTriggerManager.Instance.Send(ip, (short)DefaultTriggerId.OuterHealthCheck, dummy);
+            bool isMonitoring = ProcessManager.Instance.IsMonitoring;
+            byte[] data = new byte[1] { 0 };
+            if (isMonitoring) data[0] = 1;
+            PacketTriggerManager.Instance.Send(ip, (short)DefaultTriggerId.OuterHealthCheck, data);
         }
     }
 }

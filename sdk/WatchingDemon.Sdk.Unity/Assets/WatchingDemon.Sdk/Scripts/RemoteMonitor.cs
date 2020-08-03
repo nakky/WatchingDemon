@@ -8,7 +8,8 @@ namespace WatchingDemon.Sdk
 {
     public enum RemoteStatus
     {
-        NoError = 0,
+        NotMonitoring = 0,
+        Monitoring = 1,
         NotResponding = 255
     };
 

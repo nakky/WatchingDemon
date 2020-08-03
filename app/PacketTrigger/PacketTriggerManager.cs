@@ -92,12 +92,16 @@ namespace PacketTrigger
                     {
                         short id = (short)data[0];
                         ProcessTarget p = ProcessManager.Instance.GetProcess(id);
-                        if (p.Enable 
-                        && (p.State == ProcessState.NotResponding || p.State == ProcessState.Running))
+                        if(p != null)
                         {
-                            p.ResetCheckTime();
-                            p.ChangeState(ProcessState.Running);
+                            if (p.Enable
+                            && (p.State == ProcessState.NotResponding || p.State == ProcessState.Running))
+                            {
+                                p.ResetCheckTime();
+                                p.ChangeState(ProcessState.Running);
+                            }
                         }
+                       
                     }
                 }, CheckMode.Speedy));
 
