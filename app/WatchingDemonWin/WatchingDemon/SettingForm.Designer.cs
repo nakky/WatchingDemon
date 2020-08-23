@@ -51,6 +51,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.listViewTriggers = new System.Windows.Forms.ListView();
             this.tabPageSetting = new System.Windows.Forms.TabPage();
+            this.textBoxAutoStartDelay = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.buttonRemoveAllowList = new System.Windows.Forms.Button();
+            this.buttonAddAllowList = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listViewAllowList = new System.Windows.Forms.ListView();
             this.textBoxConfigSendPort = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.labelConfigApply = new System.Windows.Forms.Label();
@@ -60,10 +66,7 @@
             this.checkBoxConfigStartMonitor = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.buttonRemoveAllowList = new System.Windows.Forms.Button();
-            this.buttonAddAllowList = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.listViewAllowList = new System.Windows.Forms.ListView();
+            this.label9 = new System.Windows.Forms.Label();
             this.contextMenuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageMonitor.SuspendLayout();
@@ -258,6 +261,9 @@
             // 
             // tabPageSetting
             // 
+            this.tabPageSetting.Controls.Add(this.label9);
+            this.tabPageSetting.Controls.Add(this.textBoxAutoStartDelay);
+            this.tabPageSetting.Controls.Add(this.label7);
             this.tabPageSetting.Controls.Add(this.buttonRemoveAllowList);
             this.tabPageSetting.Controls.Add(this.buttonAddAllowList);
             this.tabPageSetting.Controls.Add(this.label8);
@@ -279,91 +285,23 @@
             this.tabPageSetting.Text = "Settings";
             this.tabPageSetting.UseVisualStyleBackColor = true;
             // 
-            // textBoxConfigSendPort
+            // textBoxAutoStartDelay
             // 
-            this.textBoxConfigSendPort.Location = new System.Drawing.Point(154, 149);
-            this.textBoxConfigSendPort.Name = "textBoxConfigSendPort";
-            this.textBoxConfigSendPort.Size = new System.Drawing.Size(100, 19);
-            this.textBoxConfigSendPort.TabIndex = 8;
-            this.textBoxConfigSendPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxConfigSendPort.TextChanged += new System.EventHandler(this.OnSendPortTextChanged);
+            this.textBoxAutoStartDelay.Location = new System.Drawing.Point(216, 72);
+            this.textBoxAutoStartDelay.Name = "textBoxAutoStartDelay";
+            this.textBoxAutoStartDelay.Size = new System.Drawing.Size(100, 19);
+            this.textBoxAutoStartDelay.TabIndex = 19;
+            this.textBoxAutoStartDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxAutoStartDelay.TextChanged += new System.EventHandler(this.OnAutoStartDelayTextChanged);
             // 
-            // label3
+            // label7
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 152);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 12);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Send port number";
-            // 
-            // labelConfigApply
-            // 
-            this.labelConfigApply.AutoSize = true;
-            this.labelConfigApply.ForeColor = System.Drawing.Color.Red;
-            this.labelConfigApply.Location = new System.Drawing.Point(730, 438);
-            this.labelConfigApply.Name = "labelConfigApply";
-            this.labelConfigApply.Size = new System.Drawing.Size(280, 12);
-            this.labelConfigApply.TabIndex = 6;
-            this.labelConfigApply.Text = "(Config parameters are applied when restart daemon.)";
-            this.labelConfigApply.Visible = false;
-            // 
-            // buttonRestart
-            // 
-            this.buttonRestart.Location = new System.Drawing.Point(928, 407);
-            this.buttonRestart.Name = "buttonRestart";
-            this.buttonRestart.Size = new System.Drawing.Size(75, 23);
-            this.buttonRestart.TabIndex = 5;
-            this.buttonRestart.Text = "Restart";
-            this.buttonRestart.UseVisualStyleBackColor = true;
-            this.buttonRestart.Click += new System.EventHandler(this.OnRestartClick);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(44, 115);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 12);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Listen port number";
-            // 
-            // textBoxConfigListenPort
-            // 
-            this.textBoxConfigListenPort.Location = new System.Drawing.Point(154, 112);
-            this.textBoxConfigListenPort.Name = "textBoxConfigListenPort";
-            this.textBoxConfigListenPort.Size = new System.Drawing.Size(100, 19);
-            this.textBoxConfigListenPort.TabIndex = 3;
-            this.textBoxConfigListenPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.textBoxConfigListenPort.TextChanged += new System.EventHandler(this.OnListenPortTextChanged);
-            // 
-            // checkBoxConfigStartMonitor
-            // 
-            this.checkBoxConfigStartMonitor.AutoSize = true;
-            this.checkBoxConfigStartMonitor.Location = new System.Drawing.Point(44, 48);
-            this.checkBoxConfigStartMonitor.Name = "checkBoxConfigStartMonitor";
-            this.checkBoxConfigStartMonitor.Size = new System.Drawing.Size(289, 16);
-            this.checkBoxConfigStartMonitor.TabIndex = 2;
-            this.checkBoxConfigStartMonitor.Text = "Start monitoring automatically at launching daemon.";
-            this.checkBoxConfigStartMonitor.UseVisualStyleBackColor = true;
-            this.checkBoxConfigStartMonitor.CheckedChanged += new System.EventHandler(this.OnAutoPlayCheckedChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 87);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(76, 12);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "PacketTrigger";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 12);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Process Monitor";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(42, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(168, 12);
+            this.label7.TabIndex = 18;
+            this.label7.Text = "Delay time until automatic start";
             // 
             // buttonRemoveAllowList
             // 
@@ -404,6 +342,101 @@
             this.listViewAllowList.TabIndex = 14;
             this.listViewAllowList.UseCompatibleStateImageBehavior = false;
             this.listViewAllowList.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.OnAllowListAfterLabelEdit);
+            // 
+            // textBoxConfigSendPort
+            // 
+            this.textBoxConfigSendPort.Location = new System.Drawing.Point(154, 202);
+            this.textBoxConfigSendPort.Name = "textBoxConfigSendPort";
+            this.textBoxConfigSendPort.Size = new System.Drawing.Size(100, 19);
+            this.textBoxConfigSendPort.TabIndex = 8;
+            this.textBoxConfigSendPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxConfigSendPort.TextChanged += new System.EventHandler(this.OnSendPortTextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 205);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(95, 12);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Send port number";
+            // 
+            // labelConfigApply
+            // 
+            this.labelConfigApply.AutoSize = true;
+            this.labelConfigApply.ForeColor = System.Drawing.Color.Red;
+            this.labelConfigApply.Location = new System.Drawing.Point(730, 438);
+            this.labelConfigApply.Name = "labelConfigApply";
+            this.labelConfigApply.Size = new System.Drawing.Size(280, 12);
+            this.labelConfigApply.TabIndex = 6;
+            this.labelConfigApply.Text = "(Config parameters are applied when restart daemon.)";
+            this.labelConfigApply.Visible = false;
+            // 
+            // buttonRestart
+            // 
+            this.buttonRestart.Location = new System.Drawing.Point(928, 407);
+            this.buttonRestart.Name = "buttonRestart";
+            this.buttonRestart.Size = new System.Drawing.Size(75, 23);
+            this.buttonRestart.TabIndex = 5;
+            this.buttonRestart.Text = "Restart";
+            this.buttonRestart.UseVisualStyleBackColor = true;
+            this.buttonRestart.Click += new System.EventHandler(this.OnRestartClick);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(44, 168);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 12);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Listen port number";
+            // 
+            // textBoxConfigListenPort
+            // 
+            this.textBoxConfigListenPort.Location = new System.Drawing.Point(154, 165);
+            this.textBoxConfigListenPort.Name = "textBoxConfigListenPort";
+            this.textBoxConfigListenPort.Size = new System.Drawing.Size(100, 19);
+            this.textBoxConfigListenPort.TabIndex = 3;
+            this.textBoxConfigListenPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBoxConfigListenPort.TextChanged += new System.EventHandler(this.OnListenPortTextChanged);
+            // 
+            // checkBoxConfigStartMonitor
+            // 
+            this.checkBoxConfigStartMonitor.AutoSize = true;
+            this.checkBoxConfigStartMonitor.Location = new System.Drawing.Point(44, 48);
+            this.checkBoxConfigStartMonitor.Name = "checkBoxConfigStartMonitor";
+            this.checkBoxConfigStartMonitor.Size = new System.Drawing.Size(289, 16);
+            this.checkBoxConfigStartMonitor.TabIndex = 2;
+            this.checkBoxConfigStartMonitor.Text = "Start monitoring automatically at launching daemon.";
+            this.checkBoxConfigStartMonitor.UseVisualStyleBackColor = true;
+            this.checkBoxConfigStartMonitor.CheckedChanged += new System.EventHandler(this.OnAutoPlayCheckedChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(23, 140);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "PacketTrigger";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(23, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(88, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Process Monitor";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(322, 75);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 12);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "msec.";
             // 
             // SettingForm
             // 
@@ -464,6 +497,9 @@
         private System.Windows.Forms.Button buttonAddAllowList;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ListView listViewAllowList;
+        private System.Windows.Forms.TextBox textBoxAutoStartDelay;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
     }
 }
 

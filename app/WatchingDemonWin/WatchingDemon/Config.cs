@@ -13,6 +13,8 @@ namespace WatchingDemon
         public int SendPortNumber = 12301;
         public bool AutoStart = false;
 
+        public int AutoStartDelay = 5000;
+
 
         public void Serialize(string path)
         {
@@ -21,6 +23,7 @@ namespace WatchingDemon
                 writer.WriteLine("ListenPortNumber=" + ListenPortNumber);
                 writer.WriteLine("SendPortNumber=" + SendPortNumber);
                 writer.WriteLine("AutoStart=" + AutoStart);
+                writer.WriteLine("AutoStartDelay=" + AutoStartDelay);
 
                 writer.Close();
             }
@@ -50,7 +53,12 @@ namespace WatchingDemon
                         else if(token[0] == "AutoStart")
                         {
                             AutoStart = bool.Parse(token[1]);
-                        } 
+                        }
+                        else if (token[0] == "AutoStartDelay")
+                        {
+                            AutoStartDelay = int.Parse(token[1]);
+                        }
+
                     }
                     reader.Close();
                 }

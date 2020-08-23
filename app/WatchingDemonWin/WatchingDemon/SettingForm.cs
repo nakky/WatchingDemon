@@ -6,6 +6,7 @@ using ProcessMonitor;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace WatchingDemon
 {
@@ -96,9 +97,16 @@ namespace WatchingDemon
 
             if (Config.AutoStart)
             {
-                Monitoring(true);
-                UpdateUI();
+                DelayStart(Config.AutoStartDelay);
             }
+        }
+
+        async Task DelayStart(int delayMilliSec = 5000)
+        {
+            await Task.Delay(delayMilliSec);
+            Monitoring(true);
+            UpdateUI();
+
         }
 
         void ExitApp(bool killRegularProcess = true)
@@ -357,6 +365,7 @@ namespace WatchingDemon
 
         void UpdateConfig()
         {
+            textBoxAutoStartDelay.Text = Config.AutoStartDelay.ToString();
             textBoxConfigSendPort.Text = Config.SendPortNumber.ToString();
             textBoxConfigListenPort.Text = Config.ListenPortNumber.ToString();
             checkBoxConfigStartMonitor.Checked = Config.AutoStart;
@@ -366,6 +375,7 @@ namespace WatchingDemon
             {
                 listViewAllowList.Items.Add(item);
             }
+
         }
 
 #region EventHandler
@@ -480,9 +490,8 @@ namespace WatchingDemon
                 alist.List.Remove(item.SubItems[0].Text);
             }
             alist.Serialize(Const.AllowListPath);
-            UpdateConfig();
-
             labelConfigApply.Visible = true;
+            UpdateConfig();
         }
 
         private void OnAllowListAfterLabelEdit(object sender, LabelEditEventArgs e)
@@ -499,27 +508,39 @@ namespace WatchingDemon
             }
             alist.List = list;
             alist.Serialize(Const.AllowListPath);
+            labelConfigApply.Visible = true;
             PacketTriggerManager.Instance.AllowList = alist;
             UpdateConfig();
-
-            labelConfigApply.Visible = true;
         }
 
         private void OnAutoPlayCheckedChanged(object sender, EventArgs e)
         {
+            if (Config.AutoStart != checkBoxConfigStartMonitor.Checked) labelConfigApply.Visible = true;
             Config.AutoStart = checkBoxConfigStartMonitor.Checked;
             Config.Serialize(Const.ConfigPath);
+        }
 
-            labelConfigApply.Visible = true;
+        private void OnAutoStartDelayTextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Config.AutoStartDelay != int.Parse(textBoxAutoStartDelay.Text)) labelConfigApply.Visible = true;
+                Config.AutoStartDelay = int.Parse(textBoxAutoStartDelay.Text);
+                Config.Serialize(Const.ConfigPath);
+            }
+            catch
+            {
+                UpdateConfig();
+            }
+
         }
 
         private void OnListenPortTextChanged(object sender, EventArgs e)
         {
             try
             {
-                int number = int.Parse(textBoxConfigListenPort.Text);
-                if (Config.ListenPortNumber != number) labelConfigApply.Visible = true;
-                Config.ListenPortNumber = number;
+                if (Config.ListenPortNumber != int.Parse(textBoxConfigListenPort.Text)) labelConfigApply.Visible = true;
+                Config.ListenPortNumber = int.Parse(textBoxConfigListenPort.Text);
                 Config.Serialize(Const.ConfigPath);
             }
             catch
@@ -532,9 +553,8 @@ namespace WatchingDemon
         {
             try
             {
-                int number = int.Parse(textBoxConfigSendPort.Text);
-                if (Config.SendPortNumber != number) labelConfigApply.Visible = true;
-                Config.SendPortNumber = number;
+                if (Config.SendPortNumber != int.Parse(textBoxConfigSendPort.Text)) labelConfigApply.Visible = true;
+                Config.SendPortNumber = int.Parse(textBoxConfigSendPort.Text);
                 Config.Serialize(Const.ConfigPath);
             }
             catch
@@ -589,6 +609,6 @@ namespace WatchingDemon
 
         }
 
-       
+
     }
 }
