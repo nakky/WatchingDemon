@@ -27,7 +27,7 @@ namespace PacketTrigger
             {
                 ProcessStartInfo psi = new ProcessStartInfo();
                 psi.FileName = "shutdown.exe";
-                psi.Arguments = "-s -t 0";   // shutdown
+                psi.Arguments = "-s -hybrid -t 0";   // shutdown
                 psi.CreateNoWindow = true;
                 Process p = System.Diagnostics.Process.Start(psi);
             }
